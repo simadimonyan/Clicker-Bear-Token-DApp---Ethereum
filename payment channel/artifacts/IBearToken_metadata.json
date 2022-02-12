@@ -1,0 +1,75 @@
+{
+	"compiler": {
+		"version": "0.8.10+commit.fc410830"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_value",
+						"type": "uint256"
+					}
+				],
+				"name": "transferFrom",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"payment channel/Channel.sol": "IBearToken"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"payment channel/Channel.sol": {
+			"keccak256": "0x39e7a81e8cdab3d804ecbad925c1547e80eba42834d355c3d812b4d669832931",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://dc7d61889780034c33b4f99b2dffd09a16a43d376e1ebd10faffa563067191b4",
+				"dweb:/ipfs/QmXSDkQGX92M9zait7fFx86yC3WQPzPBDAqqXsfNsVHYzv"
+			]
+		}
+	},
+	"version": 1
+}
