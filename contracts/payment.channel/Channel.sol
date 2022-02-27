@@ -11,9 +11,10 @@ contract PaymentChannel {
     event ReplacementValidators(address indexed owner, address[] indexed validators);
     event Withdrawal(address indexed player, uint256 payment, uint256 nonce, bytes indexed sig);
 
-    mapping(uint256 => bool) _usedNonces;
-    address[] _validators;
-    IBearToken _token;
+    mapping(uint256 => bool) public _usedNonces;
+    address[] public _validators;
+    IBearToken private _token;
+    address connectedToken;
     address owner;
 
     modifier onlyOwner() {
@@ -32,6 +33,7 @@ contract PaymentChannel {
 
     function connectToken(address token) public onlyOwner {
         _token = IBearToken(token);
+        connectedToken = token;
     }
 
     function getValidators() public view returns(address[] memory) {
@@ -70,7 +72,7 @@ contract PaymentChannel {
             v := byte(0, mload(add(signature, 96)))
         }
         return (r, s, v);
-    } 
+    }
 
     function verify(bytes32 _ethSignedMessage, bytes memory _signanture) public pure returns (address) {
         (bytes32 r, bytes32 s, uint8 v) = splitSignature(_signanture);
