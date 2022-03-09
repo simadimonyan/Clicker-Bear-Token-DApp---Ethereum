@@ -55,7 +55,7 @@ contract MultiSigBearWallet {
 
     constructor(address[] memory _owners, uint _confirmationsRequired) {
         require(_owners.length > 0, "NULL_OWNERS_PROVIDED");
-        require(_confirmationsRequired > 0 && 
+        require(_confirmationsRequired > 0 &&
                     _confirmationsRequired <= _owners.length, "INVALID_CONFIRMATIONS_NUMBER");
 
         for (uint i = 0; i < _owners.length; i++) {
@@ -186,7 +186,7 @@ contract MultiSigBearWallet {
             v := byte(0, mload(add(signature, 96)))
         }
         return (r, s, v);
-    } 
+    }
 
     function verify(bytes32 _ethSignedMessage, bytes memory _signanture) public pure returns (address) {
         (bytes32 r, bytes32 s, uint8 v) = splitSignature(_signanture);
@@ -203,7 +203,7 @@ contract MultiSigBearWallet {
 
     function getTransaction(uint _txIndex) public view returns (address to, uint value, bytes memory data, bool executed, uint confimations) {
         Transaction storage transaction = transactions[_txIndex];
-        return (transaction.to, transaction.value, transaction.data, transaction.executed, transaction.confirmations); 
+        return (transaction.to, transaction.value, transaction.data, transaction.executed, transaction.confirmations);
     }
 
 }

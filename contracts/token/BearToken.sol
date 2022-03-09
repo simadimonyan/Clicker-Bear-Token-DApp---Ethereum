@@ -19,7 +19,7 @@ interface ERC20 {
 contract Token is ERC20 {
 
     uint256 private constant __totalSupply = 210000000;
-    mapping (address => uint) private __balanceOf;
+    mapping (address => uint) public __balanceOf;
     mapping (address => mapping(address => uint)) __allowences;
 
     string public constant tokenName = "BearToken";
@@ -29,11 +29,11 @@ contract Token is ERC20 {
     constructor(address dapp, address channel, address[] memory owners) {
         __balanceOf[dapp] = 200000000*10**tokenDecimals;
         __allowences[dapp][channel] = 200000000*10**tokenDecimals;
-        
+
         for (uint i = 0; i < owners.length; i++) {
             __balanceOf[owners[i]] = 2000000*10**tokenDecimals;
-        } 
-    } 
+        }
+    }
 
     function name() public pure returns (string memory) {
         return tokenName;
@@ -59,17 +59,19 @@ contract Token is ERC20 {
         if (_value > 0 && _value <= balanceOf(msg.sender)) {
             __balanceOf[msg.sender] -= _value;
             __balanceOf[_to] += _value;
+            emit Transfer(msg.sender, _to, _value);
             return true;
         }
         return false;
     }
 
     function transferFrom(address _from, address _to, uint256 _value) public returns (bool success) {
-        if (__allowences[_from][msg.sender] > 0 
-        && _value > 0 
+        if (__allowences[_from][msg.sender] > 0
+        && _value > 0
         && __allowences[_from][msg.sender] >= _value) {
             __balanceOf[_from] -= _value;
             __balanceOf[_to] += _value;
+            emit Transfer(_from, _to, _value);
             return true;
         }
         return false;
@@ -77,11 +79,12 @@ contract Token is ERC20 {
 
     function approve(address _spender, uint256 _value) public returns (bool success) {
         __allowences[msg.sender][_spender] = _value;
+        emit Approval(msg.sender, _spender, _value);
         return true;
     }
 
     function allowance(address _owner, address _spender) public view returns (uint256 remaining) {
         return __allowences[_owner][_spender];
     }
-    
+
 }

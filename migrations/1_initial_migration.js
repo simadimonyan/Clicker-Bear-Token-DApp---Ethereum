@@ -1,6 +1,7 @@
 const wallet = artifacts.require("MultiSigBearWallet");
 const channel = artifacts.require("PaymentChannel");
 const token = artifacts.require("Token");
+
 let owners = ['0x29b565535918d954f7a1d6c5525d5c8b022f4f0b', '0xbddef9f6288b774ffdc41becd0296f70e9c518bd'];
 let multiSigWalletAddress;
 let channelAddress;

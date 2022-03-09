@@ -57,6 +57,10 @@ contract PaymentChannel {
         bytes32 message = getEthSignedHash(keccak256(abi.encodePacked(_reciever, payment, nonce)));
         require(validate(message, sig), "DIGITAL_SIGNATURE_IS_NOT_GENUINE");
         _token.transferFrom(owner, _reciever, payment);
+        //(bool success, ) = address(_token).delegatecall(abi.encodeWithSignature("transferFrom(address, address, uint256)",
+        //                                                                                      owner, _reciever, payment));
+        //require(success, "TRANSACTION_FAILED");
+
         emit Withdrawal(_reciever, payment, nonce, sig);
     }
 
